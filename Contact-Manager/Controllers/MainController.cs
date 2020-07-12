@@ -1,4 +1,5 @@
 ﻿using Contact_Manager.Controllers.Interfaces;
+using Contact_Manager.Exceptions;
 using Contact_Manager.Models.Commands;
 using Contact_Manager.Services.Interfaces;
 
@@ -18,11 +19,22 @@ namespace Contact_Manager.Controllers
         public void AddContact(CreateContactCommand command)
         {
             _contactService.AddContact(command.Contact);
+            _viewService.PrintSuccessNotification();
         }
 
         public void ViewContacts()
         {
             _viewService.PrintContacts(_contactService.GetAllContacts());
+        }
+
+        public void ShowUnknownError()
+        {
+            _viewService.ShowUnknownError();
+        }
+
+        public void ShowKnownError(ValidationException e)
+        {
+            _viewService.ShowKnownError(e);
         }
     }
 }
