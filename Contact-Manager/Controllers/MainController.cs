@@ -6,16 +6,23 @@ namespace Contact_Manager.Controllers
 {
     public class MainController : IMainController
     {
-        private IContactService contactService;
+        private readonly IContactService _contactService;
+        private readonly IViewService _viewService;
 
-        public MainController(IContactService contactService)
+        public MainController(IContactService contactService, IViewService viewService)
         {
-            this.contactService = contactService;
+            _contactService = contactService;
+            _viewService = viewService;
         }
 
         public void AddContact(CreateContactCommand command)
         {
-            contactService.AddContact(command.Contact);
+            _contactService.AddContact(command.Contact);
+        }
+
+        public void ViewContacts()
+        {
+            _viewService.PrintContacts(_contactService.GetAllContacts());
         }
     }
 }
