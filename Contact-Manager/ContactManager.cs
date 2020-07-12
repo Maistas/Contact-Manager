@@ -1,6 +1,7 @@
 ﻿using System;
 using Contact_Manager.Controllers;
 using Contact_Manager.Controllers.Interfaces;
+using Contact_Manager.Exceptions;
 using Contact_Manager.Models.Commands;
 using Contact_Manager.Repositories;
 using Contact_Manager.Repositories.Interfaces;
@@ -16,20 +17,33 @@ namespace Contact_Manager
         {
             var container = CreateContainer();
             var controller = container.GetInstance<IMainController>();
-            string input = null;
-            while (!string.IsNullOrEmpty(input = Console.ReadLine()))
+            while (true)
             {
-                var command = Command.Create(input);
-                switch (command)
+                var input = Console.ReadLine();
+                try
                 {
-                    case CreateContactCommand createCommand:
-                        controller.AddContact(createCommand);
-                        break;
-                    case ViewAllContactsCommand _:
-                        controller.ViewContacts();
-                        break;
-                    default:
-                        throw new InvalidOperationException();
+                    var command = Command.Create(input);
+                    switch (command)
+                    {
+                        case CreateContactCommand createCommand:
+                            controller.AddContact(createCommand);
+                            break;
+                        case ViewAllContactsCommand _:
+                            controller.ViewContacts();
+                            break;
+                        case QuitCommand _:
+                            return;
+                        default:
+                            throw new UnknownCommandException();
+                    }
+                }
+                catch (ValidationException e)
+                {
+                    controller.ShowKnownError(e);
+                }
+                catch
+                {
+                    controller.ShowUnknownError();
                 }
             }
         }

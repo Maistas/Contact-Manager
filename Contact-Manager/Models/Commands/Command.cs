@@ -1,4 +1,5 @@
 ﻿using System;
+using Contact_Manager.Exceptions;
 
 namespace Contact_Manager.Models.Commands
 {
@@ -10,11 +11,14 @@ namespace Contact_Manager.Models.Commands
         {
             var input = commandLine.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
+            if(input.Length == 0) throw new UnknownCommandException();
+            
             Command command = input[0] switch
             {
                 "create-contact" => new CreateContactCommand(),
                 "view-contacts" => new ViewAllContactsCommand(),
-                _ => throw new InvalidOperationException()
+                "quit" => new QuitCommand(),
+                _ => throw new UnknownCommandException()
             };
             command.Parse(input[1..]);
             return command;
