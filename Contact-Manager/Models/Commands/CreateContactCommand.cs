@@ -2,7 +2,7 @@
 {
     public class CreateContactCommand : Command
     {
-        public Contact Contact { get; set; }
+        public Contact Contact { get; private set; }
         
         protected override void Parse(string[] commandLine)
         {

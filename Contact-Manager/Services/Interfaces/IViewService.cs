@@ -3,10 +3,8 @@ using Contact_Manager.Models;
 
 namespace Contact_Manager.Services.Interfaces
 {
-    public interface IContactService
+    public interface IViewService
     {
-        void AddContact(Contact contact);
-        
-        List<Contact> GetAllContacts();
+        void PrintContacts(IEnumerable<Contact> contacts);
     }
 }

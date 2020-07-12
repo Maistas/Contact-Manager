@@ -10,7 +10,7 @@ using SimpleInjector;
 
 namespace Contact_Manager
 {
-    class ContactManager
+    internal static class ContactManager
     {
         private static void Main()
         {
@@ -25,6 +25,9 @@ namespace Contact_Manager
                     case CreateContactCommand createCommand:
                         controller.AddContact(createCommand);
                         break;
+                    case ViewAllContactsCommand _:
+                        controller.ViewContacts();
+                        break;
                     default:
                         throw new InvalidOperationException();
                 }
@@ -37,6 +40,7 @@ namespace Contact_Manager
             container.Register<IMainController, MainController>();
             container.Register<IContactService, ContactService>();
             container.Register<IContactRepository, ContactRepository>();
+            container.Register<IViewService, ViewService>();
             return container;
         }
     }

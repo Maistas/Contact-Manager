@@ -1,4 +1,5 @@
-﻿using Contact_Manager.Models;
+﻿using System.Collections.Generic;
+using Contact_Manager.Models;
 using Contact_Manager.Repositories.Interfaces;
 using Contact_Manager.Services.Interfaces;
 
@@ -6,16 +7,23 @@ namespace Contact_Manager.Services
 {
     public class ContactService : IContactService
     {
-        private IContactRepository contactRepository;
+        private readonly IContactRepository _contactRepository;
+        private List<Contact> _contacts;
         
         public ContactService(IContactRepository contactRepository)
         {
-            this.contactRepository = contactRepository;
+            _contactRepository = contactRepository;
         }
         
         public void AddContact(Contact contact)
         {
-            contactRepository.Add(contact);
+            _contactRepository.Add(contact);
+            _contacts?.Add(contact);
+        }
+
+        public List<Contact> GetAllContacts()
+        {
+            return _contacts ??= _contactRepository.GetAll();
         }
     }
 }
