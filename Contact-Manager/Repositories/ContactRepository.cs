@@ -23,7 +23,8 @@ namespace Contact_Manager.Repositories
             if (!File.Exists(_path) || !File.ReadAllLines(_path).Any())
             {
                 throw new ValidationException("The contact list is empty.");
-            }    
+            }
+
             return File.ReadAllLines(_path).Select(ParseContact).ToList();
         }
 
@@ -56,6 +57,17 @@ namespace Contact_Manager.Repositories
                 {
                     writer.WriteLine(s);
                 }
+            }
+        }
+
+        public void Update(int index, Contact contact)
+        {
+            var readText = File.ReadAllLines(_path);
+            File.WriteAllText(_path, string.Empty);
+            using var writer = new StreamWriter(_path);
+            for(var i = 0; i < readText.Length; i++)
+            {
+                writer.WriteLine(i == index ? ContactToString(contact) : readText[i]);
             }
         }
     }

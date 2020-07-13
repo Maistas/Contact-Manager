@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Contact_Manager.Exceptions;
 using Contact_Manager.Models;
@@ -40,7 +39,7 @@ namespace Contact_Manager.Services
                 throw new ValidationException("The contacts list is empty. There is nothing to delete.");
             }
             
-            var contact = _contacts.SingleOrDefault(x => String.CompareOrdinal(x.PhoneNumber, phoneNumber) == 0);
+            var contact = _contacts.SingleOrDefault(x => string.CompareOrdinal(x.PhoneNumber, phoneNumber) == 0);
             
             if (contact == null)
             {
@@ -49,6 +48,25 @@ namespace Contact_Manager.Services
             
             _contactRepository.Delete(contact);
             _contacts.Remove(contact);
+        }
+
+        public void UpdateContact(string updatePhoneNumber, Contact updateContact)
+        {
+            var oldContact = _contacts.Find(x => string.CompareOrdinal(x.PhoneNumber, updatePhoneNumber) == 0);
+            var index = _contacts.IndexOf(oldContact);
+            
+            if (index == -1)
+            {
+                throw new ValidationException("The update contact does not exist in contact list.");
+            }
+            
+            if(_contacts.Find(x => string.CompareOrdinal(x.PhoneNumber, updateContact.PhoneNumber) == 0 && _contacts.IndexOf(x) != index) != null)
+            {
+                throw new ValidationException("Cannot update contact's phone number since there already exists another contact with the same phone number in the contact list.");
+            }
+
+            _contacts[index] = updateContact;
+            _contactRepository.Update(index, updateContact);
         }
     }
 }

@@ -36,6 +36,9 @@ namespace Contact_Manager
                         case DeleteContactCommand deleteCommand:
                             controller.DeleteContact(deleteCommand);
                             break;
+                        case UpdateContactCommand updateCommand:
+                            controller.UpdateContact(updateCommand);
+                            break;
                         default:
                             throw new UnknownCommandException();
                     }

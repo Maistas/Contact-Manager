@@ -42,5 +42,10 @@ namespace Contact_Manager.Controllers
             _contactService.DeleteContact(command.PhoneNumber);
             _viewService.PrintSuccessNotification();
         }
+
+        public void UpdateContact(UpdateContactCommand updateCommand)
+        {
+            _contactService.UpdateContact(updateCommand.PhoneNumber, updateCommand.Contact);
+        }
     }
 }
