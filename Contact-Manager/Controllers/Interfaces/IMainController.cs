@@ -12,5 +12,7 @@ namespace Contact_Manager.Controllers.Interfaces
         void ShowUnknownError();
 
         void ShowKnownError(ValidationException e);
+
+        void DeleteContact(DeleteContactCommand command);
     }
 }

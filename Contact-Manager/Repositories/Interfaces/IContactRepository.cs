@@ -8,5 +8,7 @@ namespace Contact_Manager.Repositories.Interfaces
         void Add(Contact contact);
         
         List<Contact> GetAll();
+
+        void Delete(Contact contact);
     }
 }

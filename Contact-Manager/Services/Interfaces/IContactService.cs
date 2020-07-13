@@ -8,5 +8,7 @@ namespace Contact_Manager.Services.Interfaces
         void AddContact(Contact contact);
         
         List<Contact> GetAllContacts();
+
+        void DeleteContact(string phoneNumber);
     }
 }
