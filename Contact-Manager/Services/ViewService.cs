@@ -39,5 +39,17 @@ namespace Contact_Manager.Services
         {
             Console.WriteLine("Success!");
         }
+
+        public void ShowHelpDialog()
+        {
+            Console.WriteLine("Welcome to Contact Manager!");
+            Console.WriteLine("To create a contact type \"create-contact name lastname phonenumber\" or \"create-contact name lastname phonenumber address\".");
+            Console.WriteLine("To update a contact type \"update-contact contactphonenumber newname newlastname newphonenumber\" or" +
+                              " \"update-contact contactphonenumber newname newlastname newphonenumber newaddress\".");
+            Console.WriteLine("To delete a contact type \"delete-contact phonenumber\" to delete the contact with the corresponding phone number.");
+            Console.WriteLine("To view the contact list type \"view-contacts\".");
+            Console.WriteLine("To quit the application type \"quit\".");
+            Console.WriteLine("You can find this help dialog by typing \"help\".");
+        }
     }
 }

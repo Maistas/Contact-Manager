@@ -12,5 +12,7 @@ namespace Contact_Manager.Repositories.Interfaces
         void Delete(Contact contact);
 
         void Update(int index, Contact contact);
+        
+        void Clear();
     }
 }

@@ -16,5 +16,9 @@ namespace Contact_Manager.Controllers.Interfaces
         void DeleteContact(DeleteContactCommand command);
         
         void UpdateContact(UpdateContactCommand updateCommand);
+        
+        void ViewHelp();
+        
+        void ClearDataFile();
     }
 }

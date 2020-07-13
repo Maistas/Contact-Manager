@@ -24,7 +24,7 @@ namespace Contact_Manager.Services
                 throw new ValidationException("Contact with the same phone number already exists.");
             }
             _contactRepository.Add(contact);
-            _contacts?.Add(contact);
+            _contacts = _contactRepository.GetAll();
         }
 
         public List<Contact> GetAllContacts()
@@ -52,6 +52,10 @@ namespace Contact_Manager.Services
 
         public void UpdateContact(string updatePhoneNumber, Contact updateContact)
         {
+            if (_contacts == null || !_contacts.Any())
+            {
+                throw new ValidationException("The contacts list is empty. There is nothing to update.");
+            }
             var oldContact = _contacts.Find(x => string.CompareOrdinal(x.PhoneNumber, updatePhoneNumber) == 0);
             var index = _contacts.IndexOf(oldContact);
             
@@ -67,6 +71,11 @@ namespace Contact_Manager.Services
 
             _contacts[index] = updateContact;
             _contactRepository.Update(index, updateContact);
+        }
+
+        public void ClearData()
+        {
+            _contactRepository.Clear();
         }
     }
 }

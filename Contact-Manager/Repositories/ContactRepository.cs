@@ -70,5 +70,10 @@ namespace Contact_Manager.Repositories
                 writer.WriteLine(i == index ? ContactToString(contact) : readText[i]);
             }
         }
+
+        public void Clear()
+        {
+            if(File.Exists(_path)) File.Delete(_path);
+        }
     }
 }

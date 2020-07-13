@@ -17,6 +17,8 @@ namespace Contact_Manager
         {
             var container = CreateContainer();
             var controller = container.GetInstance<IMainController>();
+            controller.ViewHelp();
+            controller.ClearDataFile();
             while (true)
             {
                 var input = Console.ReadLine();
@@ -39,6 +41,9 @@ namespace Contact_Manager
                         case UpdateContactCommand updateCommand:
                             controller.UpdateContact(updateCommand);
                             break;
+                        case HelpCommand _:
+                            controller.ViewHelp();
+                            break;
                         default:
                             throw new UnknownCommandException();
                     }
@@ -47,10 +52,10 @@ namespace Contact_Manager
                 {
                     controller.ShowKnownError(e);
                 }
-                catch
-                {
-                    controller.ShowUnknownError();
-                }
+                // catch
+                // {
+                //     controller.ShowUnknownError();
+                // }
             }
         }
 

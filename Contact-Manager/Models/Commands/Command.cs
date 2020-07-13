@@ -20,6 +20,7 @@ namespace Contact_Manager.Models.Commands
                 "quit" => new QuitCommand(),
                 "delete-contact" => new DeleteContactCommand(),
                 "update-contact" => new UpdateContactCommand(),
+                "help" => new HelpCommand(),
                 _ => throw new UnknownCommandException()
             };
             command.Parse(input[1..]);

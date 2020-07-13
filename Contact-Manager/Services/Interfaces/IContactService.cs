@@ -12,5 +12,7 @@ namespace Contact_Manager.Services.Interfaces
         void DeleteContact(string phoneNumber);
         
         void UpdateContact(string updateCommandPhoneNumber, Contact updateCommandContact);
+        
+        void ClearData();
     }
 }

@@ -47,5 +47,15 @@ namespace Contact_Manager.Controllers
         {
             _contactService.UpdateContact(updateCommand.PhoneNumber, updateCommand.Contact);
         }
+
+        public void ViewHelp()
+        {
+            _viewService.ShowHelpDialog();
+        }
+
+        public void ClearDataFile()
+        {
+            _contactService.ClearData();
+        }
     }
 }

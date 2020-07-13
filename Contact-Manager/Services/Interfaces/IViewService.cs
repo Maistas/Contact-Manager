@@ -13,5 +13,7 @@ namespace Contact_Manager.Services.Interfaces
         void ShowKnownError(ValidationException e);
 
         void PrintSuccessNotification();
+        
+        void ShowHelpDialog();
     }
 }
