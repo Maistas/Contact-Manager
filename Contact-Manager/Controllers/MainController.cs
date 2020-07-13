@@ -36,5 +36,11 @@ namespace Contact_Manager.Controllers
         {
             _viewService.ShowKnownError(e);
         }
+
+        public void DeleteContact(DeleteContactCommand command)
+        {
+            _contactService.DeleteContact(command.PhoneNumber);
+            _viewService.PrintSuccessNotification();
+        }
     }
 }

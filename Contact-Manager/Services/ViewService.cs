@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ConsoleTables;
 using Contact_Manager.Exceptions;
 using Contact_Manager.Models;
@@ -11,6 +12,10 @@ namespace Contact_Manager.Services
     {
         public void PrintContacts(IEnumerable<Contact> contacts)
         {
+            if (!contacts.Any())
+            {
+                throw new ValidationException("The contact list is empty.");
+            }
             var table = new ConsoleTable("Name", "Last Name", "Phone Number", "Address");
             foreach (var contact in contacts)
             {

@@ -33,6 +33,9 @@ namespace Contact_Manager
                             break;
                         case QuitCommand _:
                             return;
+                        case DeleteContactCommand deleteCommand:
+                            controller.DeleteContact(deleteCommand);
+                            break;
                         default:
                             throw new UnknownCommandException();
                     }

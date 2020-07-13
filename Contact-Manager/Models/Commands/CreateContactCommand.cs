@@ -8,10 +8,11 @@ namespace Contact_Manager.Models.Commands
         
         protected override void Parse(string[] commandLine)
         {
-            if (commandLine.Length < 3)
+            if (commandLine.Length != 3 && commandLine.Length != 4)
             {
-                throw new ValidationException("Insufficient data. Please type in contact's name, last name, phone number and (optionally) address.");
+                throw new ValidationException("Unrecognised format. Please type in contact's name, last name, phone number and (optionally) address after the command.");
             }
+            
             Contact = new Contact()
             {
                 Name = commandLine[0],
