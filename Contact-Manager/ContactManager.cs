@@ -52,10 +52,10 @@ namespace Contact_Manager
                 {
                     controller.ShowKnownError(e);
                 }
-                // catch
-                // {
-                //     controller.ShowUnknownError();
-                // }
+                catch
+                {
+                    controller.ShowUnknownError();
+                }
             }
         }
 
